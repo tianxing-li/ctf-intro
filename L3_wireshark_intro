@@ -1,0 +1,67 @@
+Wireshark,网络包分析工具,网络包分析工具的主要作用是在接口实时捕捉网络包，并详细显示包的详细协议信息.Wireshark 可以捕捉多种网络接口类型的包，哪怕是无线局域网接口.Wireshark可以打开多种网络分析软件捕捉的包，可以支持许多协议的解码。我们可以用它来检测网络安全隐患、解决网络问题，也可以用它来学习网络协议、测试协议执行情况等.Wireshark不会处理网络事务，它仅仅是<监视>网络.Wireshark不会发送网络包或做其它交互性的事情.
+
+Wireshark的过滤
+    选择想监听的网卡和设备
+    过滤器中(capture filter https://wiki.wireshark.org/CaptureFilters):
+    [src|dst] host <host>
+    dst net 192.168.0.0/24
+    host 172.18.5.4
+    过滤主机ip地址或名称。通过指定src|dst关键词来确定所关注的是源地址还是目标地址.如果未指定，则指定的地址出现在源地址或目标地址中的包会被抓取
+
+    ether [src|dst] host <ehost>
+    not ether dst 01:80:c2:00:00:0e
+    过滤主机以太网地址，通过指定关键词src|dst来确定所关注的是源地址还是目标地址，如果未指定，则指定的地址出现在源地址或目标地址中的包会被抓取
+
+    [tcp|udp] [src|dst] port <port]
+    tcp portrange 1501-1549
+    过滤tcp,udp及端口号，可以使用src|dst和tcp|udp关键词来确定来自源还是目标，tcp协议还是udp协议，tcp|udp必须出现在src|dst之前
+
+    ip|ether proto <protocol> 
+    选择在以太网层或是ip层的指定协议的包
+    比如我们打算捕捉来自特定主机的telnet协议，我们可以这样写过滤tcp port 23 and host 192.168.1.5
+    又或者我们想捕捉所有不是来自192.168.1.5的telnet通信
+    tcp port 23 and not src host 192.168.1.5
+    当然还有下面这些常用的过滤
+    ip.addr==10.0.0.5
+    ip.addr!=10.0.0.5
+    ip.src==192.168.0.0/16 and ip.dst==192.168.0.0/16
+    ip.addr==10.0.0.5 xor ip.addr==192.1.1.1
+    not tcp
+
+    Blaster worm:
+    dst port 135 and tcp port 135 and ip[2:2]==48
+    Welchia worm:
+    icmp[icmptype]==icmp-echo and ip[2:2]==92 and icmp[8:4]==0xAAAAAAAA
+
+Wireshark的多文件连续存储
+    设置多文件连续存储 Use multiple files
+    如果指定条件达到临界值，Wireshark将会自动生成一个新文件
+    Next file every n megabyte(s)
+    如果捕捉文件容量达到指定值，将会生成切换到新文件
+    Next file every n minutes(s) 
+    如果捕捉文件持续时间达到指定值，将会切换到新文件
+    Ring buffer with n files
+    仅生成制定数目的文件
+    Stop caputure after n file(s)
+    当生成指定数目文件时，停止捕捉
+
+处理已保存的包
+    点击左侧<+>标记或者选择右键菜单<Expand Subtrees>，展开数据包当前选择的子树，也可以通过右键选择<Expand All>展开数据包的所有子树
+    只想看那么几个类型的包，可以设置过滤,右键之后点击<Apply as Filter>
+
+查找目标包
+    选择菜单<Edit->Find Packet…>,在对话框中输入要查找包的关键字或表达式就可以了，用户可以选择是针对过滤的包进行查找还是通过16进制值进行查找，或是通过字符串进行查找,查找到目标包以后可以通过<ctrl+n>组合键继续查找下一个,<ctrl+b>查找上一个
+
+标记包<Mark...>
+
+Wireshark设置
+
+解析包的数据,右键菜单的倒数第二个<Decode>
+
+识别数据层级:最上面的以Frame开头的是在物理层上的数据，而最下面的Hypertext对应的是应用层
+
+会话统计,<Statistics -> Conversations...>
+    通过绘制曲线的方式来展现数据,点击<Statistics -> IO Graphs...>
+    查看服务器的响应时间,点击<Statistics -> Service Response Time...>
+
+https://mp.weixin.qq.com/s/TFyst5exRV48_wKMd_KiQw
