@@ -1,0 +1,25 @@
+WWW (World Wide Web)原先是Internet的一种信息服务，可以翻译成万维网、环球网，或称Web网、3W网，由欧洲核物理研究中心 (CERN)提出.日常所说的Web其实是Internet的子集
+
+网站的基本架构B/S,Web普及后，B/S结构开始流行，并成为Web应用开发主要模式  
+    浏览器(browser),用户接口和用户请求的发出地，典型应用是网络浏览器
+    服务器端(web server),典型应用是Web服务器和运行业务代码的应用程序服务器
+        1.用户输入网页的URL
+        2.浏览器将请求发送给Web服务器
+        3.Web服务器读出网页并将网页传送给浏览器
+        4.浏览器程序将网页内容显示给用户
+
+静态网页
+动态网页,Web页面内容不是预先定制的静态文档，而是在请求过程中根据实际的数据内容和查询条件实时生成的页面.不同时刻访问同一动态网页，其内容也可能不同
+    Web浏览器,泛指安装了Web浏览器的一台电脑
+    Web服务器,互联网上提供信息服务的服务器，也称为<网站>或<站点>
+    数据库服务器,提供信息系统的数据存放和提取的服务器
+
+Web开发技术
+    Web文档表示和展现规范有：HTML,XML,CSS
+    数据传输协议方面，包括在客户端Web浏览器、Web服务器和数据库服务器间实现通信和数据交换的有：HTTP,ODBC,JDBC
+
+    服务器端:ASP/ASP.NET, C/C++,Java,VB,C#,PHP
+    客户端:VBScript,JavaScript
+    数据库技术:SQL Server,MySQL,Oracle,Access
+
+https://mp.weixin.qq.com/s/xWUgoGqIXjijbpTgF5IU4Q
